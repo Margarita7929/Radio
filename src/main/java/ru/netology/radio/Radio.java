@@ -42,34 +42,23 @@ public class Radio {
         return volumeOfSound;
     }
 
-    public void setVolumeOfSound(int newVolume) {
-        if (newVolume < 0) {
-            return;
-        }
-        if (newVolume > 9) {
-            return;
-        }
-        volumeOfSound = newVolume;
-    }
-
 
     public void increaseVolumeOfSound(int currVolume) {
-        if (currVolume == 10) {
-            volumeOfSound = 10;
-
-        } else {
+        if (currVolume < 10) {
             volumeOfSound = currVolume + 1;
+        } else {
+            volumeOfSound = 10;
 
         }
     }
 
     public void lowerVolumeOfSound(int currVolume) {
-        if (currVolume == 0) {
-            volumeOfSound = 0;
-
-        } else {
+        if (currVolume > 0) {
             volumeOfSound = currVolume - 1;
+        } else {
+            volumeOfSound = 0;
         }
+
     }
 }
 

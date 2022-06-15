@@ -141,11 +141,12 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 
+
     @Test
-    public void setSoundOfVolumeOneValueBelowMinimum() {
+    public void shouldLowerSoundIfCurrentVolumeOneValueAboveMinimum() {
         Radio radio = new Radio();
 
-        radio.setVolumeOfSound(-1);
+        radio.lowerVolumeOfSound(1);
 
         int expected = 0;
         int actual = radio.getVolumeOfSound();
@@ -154,72 +155,12 @@ public class RadioTest {
     }
 
     @Test
-    public void setMinimumSoundOfVolume() {
+    public void shouldIncreaseSoundIfCurrentVolumeOneValueBelowMaximum() {
         Radio radio = new Radio();
 
-        radio.setVolumeOfSound(0);
+        radio.increaseVolumeOfSound(9);
 
-        int expected = 0;
-        int actual = radio.getVolumeOfSound();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void setVolumeOfSoundOneValueAboveMinimum() {
-        Radio radio = new Radio();
-
-        radio.setVolumeOfSound(1);
-
-        int expected = 1;
-        int actual = radio.getVolumeOfSound();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void setVolumeOfSoundInMiddle() {
-        Radio radio = new Radio();
-
-        radio.setVolumeOfSound(5);
-
-        int expected = 5;
-        int actual = radio.getVolumeOfSound();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void setVolumeOfSoundOneValueBelowMaximum() {
-        Radio radio = new Radio();
-
-        radio.setVolumeOfSound(9);
-
-        int expected = 9;
-        int actual = radio.getVolumeOfSound();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void setVolumeOfSoundMaximum() {
-        Radio radio = new Radio();
-
-        radio.setVolumeOfSound(9);
-
-        int expected = 9;
-        int actual = radio.getVolumeOfSound();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void setVolumeOfSoundOneValueAboveMaximum() {
-        Radio radio = new Radio();
-
-        radio.setVolumeOfSound(11);
-
-        int expected = 0;
+        int expected = 10;
         int actual = radio.getVolumeOfSound();
 
         Assertions.assertEquals(expected, actual);
