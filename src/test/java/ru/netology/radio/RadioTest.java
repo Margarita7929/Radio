@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class RadioTest {
 
     @Test
-    public void setRadioStationNumberOneValueBelowMinimum() {
+    public void setStationOneValueBelowMin() {
         Radio radio = new Radio();
 
         radio.setNumberOfCurrentRadioStation(-1);
@@ -19,7 +19,7 @@ public class RadioTest {
     }
 
     @Test
-    public void setRadioStationMinimumNumber() {
+    public void setStationMinNumber() {
         Radio radio = new Radio();
 
         radio.setNumberOfCurrentRadioStation(0);
@@ -31,7 +31,7 @@ public class RadioTest {
     }
 
     @Test
-    public void setRadioStationNumberOneValueAboveMinimum() {
+    public void setStationOneValueAboveMin() {
         Radio radio = new Radio();
 
         radio.setNumberOfCurrentRadioStation(1);
@@ -43,7 +43,7 @@ public class RadioTest {
     }
 
     @Test
-    public void setRadioStationNumberInMiddle() {
+    public void setStationNumberInMid() {
         Radio radio = new Radio();
 
         radio.setNumberOfCurrentRadioStation(5);
@@ -55,7 +55,7 @@ public class RadioTest {
     }
 
     @Test
-    public void setRadioStationNumberOneValueBelowMaximum() {
+    public void setStationOneValueBelowMax() {
         Radio radio = new Radio();
 
         radio.setNumberOfCurrentRadioStation(8);
@@ -67,7 +67,7 @@ public class RadioTest {
     }
 
     @Test
-    public void setRadioStationMaximumNumber() {
+    public void setStationMaxNumber() {
         Radio radio = new Radio();
 
         radio.setNumberOfCurrentRadioStation(9);
@@ -79,7 +79,7 @@ public class RadioTest {
     }
 
     @Test
-    public void setRadioStationNumberOneValueAboveMaximum() {
+    public void setStationOneValueAboveMax() {
         Radio radio = new Radio();
 
         radio.setNumberOfCurrentRadioStation(10);
@@ -92,10 +92,11 @@ public class RadioTest {
 
     @Test
 
-    public void shouldSwitchToNextRadioStationIfCurrentInMiddle() {
+    public void switchToNextStationIfCurrentInMid() {
         Radio radio = new Radio();
+        radio.setNumberOfCurrentRadioStation(5);
 
-        radio.switchToNextRadioStation(5);
+        radio.switchToNextRadioStation();
 
         int expected = 6;
         int actual = radio.getNumberOfCurrentRadioStation();
@@ -105,10 +106,11 @@ public class RadioTest {
 
     @Test
 
-    public void ifCurrentStationIsMaximumWhenSwitchToNextShouldSetMinimumStation() {
+    public void switchFromMaxStationToMin() {
         Radio radio = new Radio();
 
-        radio.switchToNextRadioStation(9);
+        radio.setNumberOfCurrentRadioStation(9);
+        radio.switchToNextRadioStation();
 
         int expected = 0;
         int actual = radio.getNumberOfCurrentRadioStation();
@@ -117,10 +119,11 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldSwitchToPreviousRadioStationIfCurrentInMiddle() {
+    public void switchToPreviousStationIfCurrentInMid() {
         Radio radio = new Radio();
 
-        radio.switchToPreviousRadioStation(6);
+        radio.setNumberOfCurrentRadioStation(6);
+        radio.switchToPreviousRadioStation();
 
         int expected = 5;
         int actual = radio.getNumberOfCurrentRadioStation();
@@ -130,10 +133,11 @@ public class RadioTest {
 
     @Test
 
-    public void ifCurrentStationIsMinimumWhenSwitchToPrevShouldSetMaximumStation() {
+    public void switchFromMinStationToMax() {
         Radio radio = new Radio();
 
-        radio.switchToPreviousRadioStation(0);
+        radio.setNumberOfCurrentRadioStation(0);
+        radio.switchToPreviousRadioStation();
 
         int expected = 9;
         int actual = radio.getNumberOfCurrentRadioStation();
@@ -143,10 +147,11 @@ public class RadioTest {
 
 
     @Test
-    public void shouldLowerSoundIfCurrentVolumeOneValueAboveMinimum() {
+    public void lowerIfCurrentVolumeOneValueAboveMin() {
         Radio radio = new Radio();
 
-        radio.lowerVolumeOfSound(1);
+        radio.setVolumeOfSound(1);
+        radio.lowerVolumeOfSound();
 
         int expected = 0;
         int actual = radio.getVolumeOfSound();
@@ -155,10 +160,11 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldIncreaseSoundIfCurrentVolumeOneValueBelowMaximum() {
+    public void increaseIfCurrentVolumeOneValueBelowMax() {
         Radio radio = new Radio();
 
-        radio.increaseVolumeOfSound(9);
+        radio.setVolumeOfSound(9);
+        radio.increaseVolumeOfSound();
 
         int expected = 10;
         int actual = radio.getVolumeOfSound();
@@ -167,10 +173,12 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldNotTurnUpSoundIfCurrentVolumeIsMaximum() {
+    public void notTurnUpSoundIfCurrentVolumeIsMax() {
         Radio radio = new Radio();
 
-        radio.increaseVolumeOfSound(10);
+        radio.setVolumeOfSound(10);
+        radio.increaseVolumeOfSound();
+
         int expected = 10;
         int actual = radio.getVolumeOfSound();
 
@@ -178,10 +186,12 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldNotTurnUpSoundIfCurrentVolumeIsMinimum() {
+    public void notTurnUpSoundIfCurrentVolumeIsMin() {
         Radio radio = new Radio();
 
-        radio.lowerVolumeOfSound(0);
+        radio.setVolumeOfSound(0);
+        radio.lowerVolumeOfSound();
+
         int expected = 0;
         int actual = radio.getVolumeOfSound();
 
@@ -189,10 +199,13 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldTurnUpSoundAboveIfCurrentVolumeInMiddle() {
+    public void turnUpSoundAboveIfCurrentVolumeInMid() {
         Radio radio = new Radio();
 
-        radio.increaseVolumeOfSound(5);
+
+        radio.setVolumeOfSound(5);
+        radio.increaseVolumeOfSound();
+
         int expected = 6;
         int actual = radio.getVolumeOfSound();
 
@@ -200,13 +213,42 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldTurnUpSoundBelowIfCurrentVolumeInMiddle() {
+    public void turnUpSoundBelowIfCurrentVolumeInMid() {
         Radio radio = new Radio();
 
-        radio.lowerVolumeOfSound(5);
+        radio.setVolumeOfSound(5);
+        radio.lowerVolumeOfSound();
+
         int expected = 4;
         int actual = radio.getVolumeOfSound();
 
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void notSetSoundIfCurrentAboveMax() {
+        Radio radio = new Radio();
+
+        radio.setVolumeOfSound(11);
+
+
+        int expected = 0;
+        int actual = radio.getVolumeOfSound();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void notSetSoundIfCurrentAboveMin() {
+        Radio radio = new Radio();
+
+        radio.setVolumeOfSound(-1);
+
+
+        int expected = 0;
+        int actual = radio.getVolumeOfSound();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
 }

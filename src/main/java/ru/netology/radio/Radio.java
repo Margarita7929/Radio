@@ -18,47 +18,61 @@ public class Radio {
         numberOfCurrentRadioStation = newNumberOfCurrentRadioStation;
     }
 
-    public void switchToNextRadioStation(int currentStation) {
-        if (currentStation == 9) {
-            numberOfCurrentRadioStation = 0;
-
+    public void switchToNextRadioStation() {
+        int newRadioStation;
+        if (numberOfCurrentRadioStation < 9) {
+            newRadioStation = numberOfCurrentRadioStation + 1;
         } else {
-            numberOfCurrentRadioStation = currentStation + 1;
+            newRadioStation = 0;
         }
-
+        setNumberOfCurrentRadioStation(newRadioStation);
     }
 
-    public void switchToPreviousRadioStation(int currentStation) {
-        if (currentStation == 0) {
-            numberOfCurrentRadioStation = 9;
 
+    public void switchToPreviousRadioStation() {
+        int newRadioStation;
+        if (numberOfCurrentRadioStation > 0) {
+            newRadioStation = numberOfCurrentRadioStation - 1;
         } else {
-            numberOfCurrentRadioStation = currentStation - 1;
+            newRadioStation = 9;
         }
-
+        setNumberOfCurrentRadioStation(newRadioStation);
     }
+
 
     public int getVolumeOfSound() {
         return volumeOfSound;
     }
 
-
-    public void increaseVolumeOfSound(int currVolume) {
-        if (currVolume < 10) {
-            volumeOfSound = currVolume + 1;
-        } else {
-            volumeOfSound = 10;
-
+    public void setVolumeOfSound(int newVolumeOfSound) {
+        if (newVolumeOfSound < 0) {
+            return;
         }
+        if (newVolumeOfSound > 10) {
+            return;
+        }
+        volumeOfSound = newVolumeOfSound;
     }
 
-    public void lowerVolumeOfSound(int currVolume) {
-        if (currVolume > 0) {
-            volumeOfSound = currVolume - 1;
+    public void increaseVolumeOfSound() {
+        int newVolume;
+        if (volumeOfSound < 10) {
+            newVolume = volumeOfSound + 1;
         } else {
-            volumeOfSound = 0;
+            newVolume = 10;
         }
+        setVolumeOfSound(newVolume);
+    }
 
+
+    public void lowerVolumeOfSound() {
+        int newVolume;
+        if (volumeOfSound > 0) {
+            newVolume = volumeOfSound - 1;
+        } else {
+            newVolume = 0;
+        }
+        setVolumeOfSound(newVolume);
     }
 }
 
