@@ -1,8 +1,20 @@
 package ru.netology.radio;
 
 public class Radio {
-    private int numberOfCurrentRadioStation;
-    private int volumeOfSound;
+    public int numberOfCurrentRadioStation;
+    public int volumeOfSound;
+    public int sumOfRadioStations;
+    public int numberOfMaxStation = sumOfRadioStations - 1;
+
+
+    public Radio(int sumOfRadioStations) {
+        this.sumOfRadioStations = sumOfRadioStations;
+        this.numberOfMaxStation = sumOfRadioStations - 1;
+    }
+
+    public Radio() {
+        sumOfRadioStations = 10;
+    }
 
     public int getNumberOfCurrentRadioStation() {
         return numberOfCurrentRadioStation;
@@ -12,7 +24,7 @@ public class Radio {
         if (newNumberOfCurrentRadioStation < 0) {
             return;
         }
-        if (newNumberOfCurrentRadioStation > 9) {
+        if (newNumberOfCurrentRadioStation > numberOfMaxStation) {
             return;
         }
         numberOfCurrentRadioStation = newNumberOfCurrentRadioStation;
@@ -20,7 +32,7 @@ public class Radio {
 
     public void switchToNextRadioStation() {
         int newRadioStation;
-        if (numberOfCurrentRadioStation < 9) {
+        if (numberOfCurrentRadioStation < numberOfMaxStation) {
             newRadioStation = numberOfCurrentRadioStation + 1;
         } else {
             newRadioStation = 0;
@@ -34,7 +46,7 @@ public class Radio {
         if (numberOfCurrentRadioStation > 0) {
             newRadioStation = numberOfCurrentRadioStation - 1;
         } else {
-            newRadioStation = 9;
+            newRadioStation = numberOfMaxStation;
         }
         setNumberOfCurrentRadioStation(newRadioStation);
     }
@@ -48,7 +60,7 @@ public class Radio {
         if (newVolumeOfSound < 0) {
             return;
         }
-        if (newVolumeOfSound > 10) {
+        if (newVolumeOfSound > 100) {
             return;
         }
         volumeOfSound = newVolumeOfSound;
@@ -56,10 +68,10 @@ public class Radio {
 
     public void increaseVolumeOfSound() {
         int newVolume;
-        if (volumeOfSound < 10) {
+        if (volumeOfSound < 100) {
             newVolume = volumeOfSound + 1;
         } else {
-            newVolume = 10;
+            newVolume = 100;
         }
         setVolumeOfSound(newVolume);
     }
